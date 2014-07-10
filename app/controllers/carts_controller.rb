@@ -67,15 +67,11 @@ class CartsController < ApplicationController
     respond_to do |format|
       if @cart.save
         format.html { 
-          puts "==========="
-          puts "Its an HTML query"
-          put "============"
+          
           redirect_to(@cart, :notice => 'Cart was successfully created.') 
         }
         format.js   { 
-          puts "==========="
-          puts "Its an Ajax query"
-          put "============"
+        
         }
         format.xml  { render :xml => @cart, :status => :created, :location => @cart }
       else

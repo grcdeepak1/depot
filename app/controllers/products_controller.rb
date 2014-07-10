@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @orders = Order.paginate :page=>params[:page], :order=>'created_at desc',
+      :per_page => 10
   end
 
   # GET /products/1
@@ -23,6 +25,13 @@ class ProductsController < ApplicationController
 
   # POST /products
   # POST /products.json
+  def who_bought
+    @product = Product.find(params[:id]) 
+    respond_to do |format|
+    format.atom
+    format.xml { render :xml => @product }
+    end 
+  end
   def create
     @product = Product.new(product_params)
 
